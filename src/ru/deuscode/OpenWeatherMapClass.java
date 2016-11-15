@@ -1,5 +1,4 @@
 package ru.deuscode;
-//import main.java.org.json.simple.*;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import java.io.BufferedReader;
@@ -7,8 +6,8 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public class OpenWeatherMapClass {
-    public String sendGet() throws Exception {
+class OpenWeatherMapClass {
+    String sendGet() throws Exception {
         String code = "1dbb0e889a89bc1daa841540097190bc";
         String city = "Fryazino,ru";
 
@@ -21,13 +20,12 @@ public class OpenWeatherMapClass {
         con.setRequestMethod("GET");
 
 
-        int responseCode = con.getResponseCode();
-
         BufferedReader in = new BufferedReader(
                 new InputStreamReader(con.getInputStream()));
         String inputLine;
 
-        StringBuffer response = new StringBuffer();
+        StringBuilder response;
+        response = new StringBuilder();
 
         while ((inputLine = in.readLine()) != null) {
             response.append(inputLine);
@@ -35,15 +33,13 @@ public class OpenWeatherMapClass {
         in.close();
 
 
-        String json = response.toString();
+        String json;
+        json = response.toString();
         JSONParser parser = new JSONParser();
 
         Object parse = parser.parse(json);
         JSONObject jsonObj = (JSONObject) parse;
         JSONObject main = (JSONObject) jsonObj.get("main");
-        String temp = (String) main.get("temp").toString();
-        //print result
-        return temp;
-
+        return main.get("temp").toString();
     }
 }
