@@ -102,6 +102,6 @@ public class JSONArray extends ArrayList implements List, JSONAware, JSONStreamA
 		return toJSONString();
 	}
 
-	
-		
+
+
 }
